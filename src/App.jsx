@@ -12,7 +12,7 @@ export const tabs = [
 ];
 
 export const App = () => {
-  const [currentTabText, setCurrentTabText] = useState('Some text 1');
+  const [currentDivText, setCurrentTabText] = useState('Some text 1');
   const [currentTItle, setCurrentTitle] = useState('Tab 1');
 
   return (
@@ -26,7 +26,7 @@ export const App = () => {
               return (
                 <li
                   className={cn('', {
-                    'is-active': currentTabText === tab.content,
+                    'is-active': currentDivText === tab.content,
                   })}
                   data-cy="Tab"
                   key={tab.id}
@@ -49,7 +49,7 @@ export const App = () => {
         </div>
 
         <div className="block" data-cy="TabContent">
-          {currentTabText}
+          {currentDivText}
         </div>
       </div>
     </div>
