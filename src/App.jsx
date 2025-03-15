@@ -11,48 +11,40 @@ export const tabs = [
   { id: 'tab-3', title: 'Tab 3', content: 'Some text 3' },
 ];
 
-export const App = ({ onTabSelected }) => {
-  const [currentTabId, setCurrentTabId] = useState(tabs[0].id);
-  const [currentTabText, setCurrentTabText] = useState(tabs[0].content);
-
-  const handleTabClick = tab => {
-    if (currentTabId === tab.id) return;
-
-    setCurrentTabId(tab.id);
-    setCurrentTabText(tab.content);
-
-    if (onTabSelected) {
-      onTabSelected(tab.id);
-    }
-  };
+export const App = () => {
+  const [currentTabText, setCurrentTabText] = useState('Some text 1');
+  const [currentTItle, setCurrentTitle] = useState('Tab 1');
 
   return (
     <div className="section">
-      <h1 className="title">{`Selected tab is ${tabs.find(tab => tab.id === currentTabId)?.title}`}</h1>
+      <h1 className="title">{`Selected tab is ${currentTItle}`}</h1>
 
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
           <ul>
-            {tabs.map(tab => (
-              <li
-                className={cn('', {
-                  'is-active': currentTabId === tab.id,
-                })}
-                data-cy="Tab"
-                key={tab.id}
-              >
-                <a
-                  onClick={e => {
-                    e.preventDefault();
-                    handleTabClick(tab);
-                  }}
-                  href={`#${tab.id}`}
-                  data-cy="TabLink"
+            {tabs.map(tab => {
+              return (
+                <li
+                  className={cn('', {
+                    'is-active': currentTabText === tab.content,
+                  })}
+                  data-cy="Tab"
+                  key={tab.id}
                 >
-                  {tab.title}
-                </a>
-              </li>
-            ))}
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                      setCurrentTabText(tab.content);
+                      setCurrentTitle(tab.title);
+                    }}
+                    href={tab.id}
+                    data-cy="TabLink"
+                  >
+                    {tab.title}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
