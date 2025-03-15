@@ -12,39 +12,37 @@ export const tabs = [
 ];
 
 export const App = () => {
+  const [currentTabId, setCurrentTabId] = useState('tab-1');
   const [currentTabText, setCurrentTabText] = useState('Some text 1');
-  const [currentTItle, setCurrentTitle] = useState('Tab 1');
 
   return (
     <div className="section">
-      <h1 className="title">{`Selected tab is ${currentTItle}`}</h1>
+      <h1 className="title">{`Selected tab is ${tabs.find(tab => tab.id === currentTabId)?.title}`}</h1>
 
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
           <ul>
-            {tabs.map(tab => {
-              return (
-                <li
-                  className={cn('', {
-                    'is-active': currentTabText === tab.content,
-                  })}
-                  data-cy="Tab"
-                  key={tab.id}
+            {tabs.map(tab => (
+              <li
+                className={cn('', {
+                  'is-active': currentTabId === tab.id,
+                })}
+                data-cy="Tab"
+                key={tab.id}
+              >
+                <a
+                  onClick={e => {
+                    e.preventDefault();
+                    setCurrentTabId(tab.id);
+                    setCurrentTabText(tab.content);
+                  }}
+                  href={`#${tab.id}`}
+                  data-cy="TabLink"
                 >
-                  <a
-                    onClick={e => {
-                      e.preventDefault();
-                      setCurrentTabText(tab.content);
-                      setCurrentTitle(tab.title);
-                    }}
-                    href={tab.id}
-                    data-cy="TabLink"
-                  >
-                    {tab.title}
-                  </a>
-                </li>
-              );
-            })}
+                  {tab.title}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
