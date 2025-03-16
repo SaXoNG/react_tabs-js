@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import cn from 'classnames';
 
 import './App.scss';
+import { Tabs } from './components/Tabs/Tabs';
 
 export const tabs = [
   { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
@@ -21,7 +21,13 @@ export const App = () => {
 
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
-          <ul>
+          <Tabs
+            tabs={tabs}
+            currentTabId={currentTabId}
+            setCurrentTabId={setCurrentTabId}
+            setCurrentTabText={setCurrentTabText}
+          />
+          {/* <ul>
             {tabs.map(tab => (
               <li
                 className={cn('', {
@@ -43,7 +49,7 @@ export const App = () => {
                 </a>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
 
         <div className="block" data-cy="TabContent">
